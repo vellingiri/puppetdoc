@@ -1,0 +1,4 @@
+puppetdoc
+=========
+
+Puppet Learn documents
