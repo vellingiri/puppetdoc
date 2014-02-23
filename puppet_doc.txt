@@ -1,0 +1,15 @@
+node declaration:
+	node is the puppet term for an individual machine that has a puppet configuration
+	
+	syntax:
+		node NODENAME {
+			RESOURCE1
+			RESOURCE2
+		}
+
+here,
+NODENAME is the hostname of the relevant machine
+RESOURCE  is a resource declaration
+
+	
+	

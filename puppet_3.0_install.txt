@@ -1,0 +1,1095 @@
+#wget
+#https://s3.amazonaws.com/pe-builds/released/3.0.1/puppet-enterprise-3.0.1-el-6-i386.tar.gz
+##tar -xvzf puppet-enterprise-3.0.1-el-6-i386.tar.gz
+##cd puppet-enterprise-3.0.1-el-6-i386
+##
+#
+#https://projects.puppetlabs.com/issues/20269 => reference url
+#http://zid-lux1.uibk.ac.at/linux/rpm2html/centos/5/os/x86_64/CentOS/virt-what-1.11-2.el5.x86_64.html
+[root@master puppet-enterprise-3.0.1-el-6-i386]# ./puppet-enterprise-installer 
+=============================================================================================================================
+
+Puppet Enterprise v3.0.1 installer
+
+Puppet Enterprise documentation can be found at http://links.puppetlabs.com/puppet_enterprise_3.0_documentation
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 1: SELECT AND CONFIGURE ROLES
+
+   This installer lets you select and install the various roles required in a Puppet Enterprise deployment: puppet
+   master, console, database, cloud provisioner, and puppet agent.
+
+NOTE: when specifying hostnames during installation, use the fully-qualified domain name (foo.example.com) rather than a shortened name (foo).
+
+
+-> puppet master
+
+   The puppet master serves configurations to a group of puppet agent nodes. This role also provides MCollective's
+   message queue and client interface. It should be installed on a robust, dedicated server.
+
+?? Install puppet master? [y/N] y
+
+-> standalone install
+
+   You may choose to either install PuppetDB and the console on this node, or to install each service on its own node. If
+   you choose not to install PuppetDB and the console on this node, you will be asked where to find them.
+
+?? Install PuppetDB and console on this node? [Y/n] y
+
+-> cloud provisioner
+
+   The cloud provisioner can create and bootstrap new machine instances and add them to your Puppet infrastructure. It
+   should be installed on a trusted node where site administrators have shell access.
+
+?? Install the cloud provisioner? [y/N] y
+
+-> puppet agent
+
+   The puppet agent role is automatically installed with the console, puppet master, puppetdb, and cloud provisioner
+   roles.
+
+?? The puppet master's certificate will contain a unique name ("certname"); this should be the main DNS name at which it
+   can be reliably reached. Puppet master's certname? [Default: master] master.rdulinux.com
+?? The puppet master's certificate can contain DNS aliases; agent nodes will only trust the master if they reach it at
+   its certname or one of these official aliases. Puppet master's DNS aliases (comma-separated list)? [Default:
+   master,master.rdulinux.com,puppet,puppet.rdulinux.com] 
+
+   The Puppet Enterprise console and PuppetDB require a PostgreSQL database and a user account able to edit it. You can
+   either install PostgreSQL locally or specify a remote database. (which must be configured and available prior to
+   installing the console or PuppetDB)
+?? Install a PostgreSQL server locally? [Y/n] y
+?? Admin email address (will be used as account name) for accessing the console interface? admin@rdulinux.com
+?? Password for user admin@rdulinux.com (minimum 8 characters)? 
+Confirm Password: 
+
+   The console requires an SMTP server to email account information to users.
+?? What is the name of your SMTP server? localhost
+
+-> Convenience Links
+
+   The selected Puppet software will be installed into "/opt/puppet", which may not be included in your default shell
+   PATH. For ease of use, this installer can create symbolic links to these executables in "/usr/local/bin".
+
+?? Create symbolic links to Puppet executables in "/usr/local/bin"? [Y/n] 
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 2: CONFIRM PLAN
+
+You have selected to install the following components (and their dependencies)
+* Puppet Master
+* PuppetDB
+* Console
+* Cloud Provisioner
+* Puppet Agent
+
+?? Perform installation? [Y/n] y
+## Saved answers to file: /root/puppet-enterprise-3.0.1-el-6-i386/answers.lastrun.master
+
+=============================================================================================================================
+## Saved answers to file: /etc/puppetlabs/installer/answers.install
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 3: INSTALL PACKAGES
+
+## Installing packages from repositories...
+Loaded plugins: refresh-packagekit, rhnplugin
+This system is not registered with RHN.
+RHN support will be disabled.
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package pe-activemq.noarch 0:5.8.0-5.pe.el6 set to be updated
+---> Package pe-augeas.i386 0:1.0.0-4.pe.el6 set to be updated
+---> Package pe-bundler.noarch 0:1.3.5-2.pe.el6 set to be updated
+---> Package pe-certificate-manager.noarch 0:0.4.6-1.pe.el6 set to be updated
+---> Package pe-cloud-provisioner.noarch 0:1.0.10-1.el6 set to be updated
+---> Package pe-console.noarch 0:0.3.8-1.pe.el6 set to be updated
+---> Package pe-console-auth.noarch 0:1.2.15-1.pe.el6 set to be updated
+--> Processing Dependency: pe-ruby-mysql for package: pe-console-auth-1.2.15-1.pe.el6.noarch
+---> Package pe-facter.noarch 0:1.7.1-2.pe.el6 set to be updated
+--> Processing Dependency: virt-what for package: pe-facter-1.7.1-2.pe.el6.noarch
+---> Package pe-hiera.noarch 0:1.2.1-4.pe.el6 set to be updated
+---> Package pe-httpd.i386 0:2.2.25-3.pe.el6 set to be updated
+---> Package pe-java.i386 0:1.7.0.19-3.pe.el6 set to be updated
+---> Package pe-libevent.i386 0:2.0.13-5.el6 set to be updated
+---> Package pe-libyaml.i386 0:0.1.4-3.el6 set to be updated
+---> Package pe-live-management.noarch 0:1.2.13-1.pe.el6 set to be updated
+---> Package pe-mcollective.noarch 0:2.2.4-2.pe.el6 set to be updated
+---> Package pe-mcollective-client.noarch 0:2.2.4-2.pe.el6 set to be updated
+---> Package pe-mcollective-common.noarch 0:2.2.4-2.pe.el6 set to be updated
+---> Package pe-memcached.i386 0:1.4.7-6.pe.el6 set to be updated
+---> Package pe-mod_ssl.i386 1:2.2.25-3.pe.el6 set to be updated
+---> Package pe-passenger.i386 0:4.0.10-4.pe.el6 set to be updated
+---> Package pe-postgresql.i386 0:9.2.4-6.pe.el6 set to be updated
+---> Package pe-postgresql-server.i386 0:9.2.4-6.pe.el6 set to be updated
+---> Package pe-puppet.noarch 0:3.2.4.pe1-1.pe.el6 set to be updated
+---> Package pe-puppet-dashboard.i386 0:2.0.1.pe-1.pe.el6 set to be updated
+---> Package pe-puppet-enterprise-release.noarch 0:3.0.1-1.pe.el6 set to be updated
+---> Package pe-puppet-server.noarch 0:3.2.4.pe1-1.pe.el6 set to be updated
+---> Package pe-ruby.i386 0:1.9.3.448-2.pe.el6 set to be updated
+---> Package pe-ruby-augeas.i386 0:0.5.0-3.pe.el6 set to be updated
+---> Package pe-ruby-ldap.i386 0:0.9.12-3.pe.el6 set to be updated
+---> Package pe-ruby-rgen.noarch 0:0.6.2-1.pe.el6 set to be updated
+---> Package pe-ruby-shadow.i386 0:2.2.0-3.pe.el6 set to be updated
+---> Package pe-ruby-stomp.noarch 0:1.2.9-4.pe.el6 set to be updated
+---> Package pe-rubycas-server.noarch 0:1.1.10-1.pe.el6 set to be updated
+---> Package pe-rubygem-builder.noarch 0:3.0.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-deep-merge.noarch 0:1.0.0-3.pe.el6 set to be updated
+---> Package pe-rubygem-excon.noarch 0:0.14.1-2.pe.el6 set to be updated
+---> Package pe-rubygem-fog.noarch 0:1.5.0-3.pe.el6 set to be updated
+---> Package pe-rubygem-formatador.noarch 0:0.2.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-guid.noarch 0:0.1.1-2.pe.el6 set to be updated
+---> Package pe-rubygem-mime-types.noarch 0:1.16-2.pe.el6 set to be updated
+---> Package pe-rubygem-multi-json.noarch 0:1.0.3-2.pe.el6 set to be updated
+---> Package pe-rubygem-net-scp.noarch 0:1.0.4-2.pe.el6 set to be updated
+---> Package pe-rubygem-net-ssh.noarch 0:2.1.4-2.pe.el6 set to be updated
+---> Package pe-rubygem-nokogiri.i386 0:1.5.0-8.pe.el6 set to be updated
+---> Package pe-rubygem-rack.noarch 0:1.4.5-2.pe.el6 set to be updated
+---> Package pe-rubygem-rbvmomi.noarch 0:1.3.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-ruby-hmac.noarch 0:0.4.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-trollop.noarch 0:1.16.2-2.pe.el6 set to be updated
+---> Package pe-tanukiwrapper.i386 0:3.5.9-11.pe.el6 set to be updated
+--> Running transaction check
+---> Package pe-facter.noarch 0:1.7.1-2.pe.el6 set to be updated
+--> Processing Dependency: virt-what for package: pe-facter-1.7.1-2.pe.el6.noarch
+---> Package pe-ruby-mysql.i386 0:2.8.2-3.pe.el6 set to be updated
+--> Finished Dependency Resolution
+Error: Package: pe-facter-1.7.1-2.pe.el6.noarch (puppet-enterprise-installer)
+           Requires: virt-what
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
+
+=============================================================================================================================
+
+!! ERROR: Package installation failed
+
+=============================================================================================================================
+[root@master puppet-enterprise-3.0.1-el-6-i386]# wget ftp://rpmfind.net/linux/centos/6.4/os/i386/Packages/virt-what-1.11-1.2.el6.i686.rpm
+--2013-10-16 20:58:49--  ftp://rpmfind.net/linux/centos/6.4/os/i386/Packages/virt-what-1.11-1.2.el6.i686.rpm
+           => “virt-what-1.11-1.2.el6.i686.rpm”
+Resolving rpmfind.net... 195.220.108.108
+Connecting to rpmfind.net|195.220.108.108|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /linux/centos/6.4/os/i386/Packages ... done.
+==> SIZE virt-what-1.11-1.2.el6.i686.rpm ... 24092
+==> PASV ... done.    ==> RETR virt-what-1.11-1.2.el6.i686.rpm ... done.
+Length: 24092 (24K) (unauthoritative)
+
+100%[===================================================================================>] 24,092      58.5K/s   in 0.4s    
+
+2013-10-16 20:58:52 (58.5 KB/s) - “virt-what-1.11-1.2.el6.i686.rpm” saved [24092]
+
+[root@master puppet-enterprise-3.0.1-el-6-i386]# rpm -iUvh   virt-what-1.11-1.2.el6.i686.rpm 
+warning: virt-what-1.11-1.2.el6.i686.rpm: Header V3 RSA/SHA1 Signature, key ID c105b9de: NOKEY
+Preparing...                ########################################### [100%]
+   1:virt-what              ########################################### [100%]
+[root@master puppet-enterprise-3.0.1-el-6-i386]# wget ftp://fr2.rpmfind.net/linux/centos/6.4/os/i386/Packages/redhat-logos-60.0.14-12.el6.centos.noarch.rpm
+--2013-10-16 21:01:44--  ftp://fr2.rpmfind.net/linux/centos/6.4/os/i386/Packages/redhat-logos-60.0.14-12.el6.centos.noarch.rpm
+           => “redhat-logos-60.0.14-12.el6.centos.noarch.rpm”
+Resolving fr2.rpmfind.net... 195.220.108.108
+Connecting to fr2.rpmfind.net|195.220.108.108|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /linux/centos/6.4/os/i386/Packages ... done.
+==> SIZE redhat-logos-60.0.14-12.el6.centos.noarch.rpm ... 15219436
+==> PASV ... done.    ==> RETR redhat-logos-60.0.14-12.el6.centos.noarch.rpm ... done.
+Length: 15219436 (15M) (unauthoritative)
+
+100%[===================================================================================>] 15,219,436   244K/s   in 63s     
+
+2013-10-16 21:02:50 (235 KB/s) - “redhat-logos-60.0.14-12.el6.centos.noarch.rpm” saved [15219436]
+
+[root@master puppet-enterprise-3.0.1-el-6-i386]# rpm -iUvh redhat-logos-60.0.14-12.el6.centos.noarch.rpm 
+warning: redhat-logos-60.0.14-12.el6.centos.noarch.rpm: Header V3 RSA/SHA1 Signature, key ID c105b9de: NOKEY
+Preparing...                ########################################### [100%]
+   1:redhat-logos           ########################################### [100%]
+
+ot@master puppet-enterprise-3.0.1-el-6-i386]# ./puppet-enterprise-installer -A answers.lastrun.master 
+=============================================================================================================================
+
+Puppet Enterprise v3.0.1 installer
+
+Puppet Enterprise documentation can be found at http://links.puppetlabs.com/puppet_enterprise_3.0_documentation
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 1: READ ANSWERS FROM FILE
+
+## Reading answers from file: ./answers.lastrun.master
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 2: SELECT AND CONFIGURE ROLES
+
+   This installer lets you select and install the various roles required in a Puppet Enterprise deployment: puppet
+   master, console, database, cloud provisioner, and puppet agent.
+
+NOTE: when specifying hostnames during installation, use the fully-qualified domain name (foo.example.com) rather than a shortened name (foo).
+
+
+-> puppet master
+
+   The puppet master serves configurations to a group of puppet agent nodes. This role also provides MCollective's
+   message queue and client interface. It should be installed on a robust, dedicated server.
+
+?? Install puppet master? [y/N] y
+
+-> standalone install
+
+   You may choose to either install PuppetDB and the console on this node, or to install each service on its own node. If
+   you choose not to install PuppetDB and the console on this node, you will be asked where to find them.
+
+?? Install PuppetDB and console on this node? [Y/n] y
+
+-> cloud provisioner
+
+   The cloud provisioner can create and bootstrap new machine instances and add them to your Puppet infrastructure. It
+   should be installed on a trusted node where site administrators have shell access.
+
+?? Install the cloud provisioner? [y/N] y
+
+-> puppet agent
+
+   The puppet agent role is automatically installed with the console, puppet master, puppetdb, and cloud provisioner
+   roles.
+
+?? The puppet master's certificate will contain a unique name ("certname"); this should be the main DNS name at which it
+   can be reliably reached. Puppet master's certname? [Default: master] master.rdulinux.com
+?? The puppet master's certificate can contain DNS aliases; agent nodes will only trust the master if they reach it at
+   its certname or one of these official aliases. Puppet master's DNS aliases (comma-separated list)? [Default:
+   master,master.rdulinux.com,puppet,puppet.rdulinux.com] master,master.rdulinux.com,puppet,puppet.rdulinux.com
+
+   The Puppet Enterprise console and PuppetDB require a PostgreSQL database and a user account able to edit it. You can
+   either install PostgreSQL locally or specify a remote database. (which must be configured and available prior to
+   installing the console or PuppetDB)
+?? Install a PostgreSQL server locally? [Y/n] y
+?? Admin email address (will be used as account name) for accessing the console interface? admin@rdulinux.com
+?? Password for user admin@rdulinux.com (minimum 8 characters)? 
+
+   The console requires an SMTP server to email account information to users.
+?? What is the name of your SMTP server? localhost
+
+-> Convenience Links
+
+   The selected Puppet software will be installed into "/opt/puppet", which may not be included in your default shell
+   PATH. For ease of use, this installer can create symbolic links to these executables in "/usr/local/bin".
+
+?? Create symbolic links to Puppet executables in "/usr/local/bin"? [Y/n] y
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 3: CONFIRM PLAN
+
+You have selected to install the following components (and their dependencies)
+* Puppet Master
+* PuppetDB
+* Console
+* Cloud Provisioner
+* Puppet Agent
+
+?? Perform installation? [Y/n] y
+## Saved answers to file: /root/puppet-enterprise-3.0.1-el-6-i386/answers.lastrun.master
+
+=============================================================================================================================
+## Saved answers to file: /etc/puppetlabs/installer/answers.install
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 4: INSTALL PACKAGES
+
+## Installing packages from repositories...
+Loaded plugins: refresh-packagekit, rhnplugin
+This system is not registered with RHN.
+RHN support will be disabled.
+Setting up Install Process
+No package system-logos available.
+Resolving Dependencies
+--> Running transaction check
+---> Package pe-activemq.noarch 0:5.8.0-5.pe.el6 set to be updated
+---> Package pe-augeas.i386 0:1.0.0-4.pe.el6 set to be updated
+---> Package pe-bundler.noarch 0:1.3.5-2.pe.el6 set to be updated
+---> Package pe-certificate-manager.noarch 0:0.4.6-1.pe.el6 set to be updated
+---> Package pe-cloud-provisioner.noarch 0:1.0.10-1.el6 set to be updated
+---> Package pe-console.noarch 0:0.3.8-1.pe.el6 set to be updated
+---> Package pe-console-auth.noarch 0:1.2.15-1.pe.el6 set to be updated
+--> Processing Dependency: pe-ruby-mysql for package: pe-console-auth-1.2.15-1.pe.el6.noarch
+---> Package pe-facter.noarch 0:1.7.1-2.pe.el6 set to be updated
+---> Package pe-hiera.noarch 0:1.2.1-4.pe.el6 set to be updated
+---> Package pe-httpd.i386 0:2.2.25-3.pe.el6 set to be updated
+---> Package pe-java.i386 0:1.7.0.19-3.pe.el6 set to be updated
+---> Package pe-libevent.i386 0:2.0.13-5.el6 set to be updated
+---> Package pe-libyaml.i386 0:0.1.4-3.el6 set to be updated
+---> Package pe-live-management.noarch 0:1.2.13-1.pe.el6 set to be updated
+---> Package pe-mcollective.noarch 0:2.2.4-2.pe.el6 set to be updated
+---> Package pe-mcollective-client.noarch 0:2.2.4-2.pe.el6 set to be updated
+---> Package pe-mcollective-common.noarch 0:2.2.4-2.pe.el6 set to be updated
+---> Package pe-memcached.i386 0:1.4.7-6.pe.el6 set to be updated
+---> Package pe-mod_ssl.i386 1:2.2.25-3.pe.el6 set to be updated
+---> Package pe-passenger.i386 0:4.0.10-4.pe.el6 set to be updated
+---> Package pe-postgresql.i386 0:9.2.4-6.pe.el6 set to be updated
+---> Package pe-postgresql-server.i386 0:9.2.4-6.pe.el6 set to be updated
+---> Package pe-puppet.noarch 0:3.2.4.pe1-1.pe.el6 set to be updated
+---> Package pe-puppet-dashboard.i386 0:2.0.1.pe-1.pe.el6 set to be updated
+---> Package pe-puppet-enterprise-release.noarch 0:3.0.1-1.pe.el6 set to be updated
+---> Package pe-puppet-server.noarch 0:3.2.4.pe1-1.pe.el6 set to be updated
+---> Package pe-ruby.i386 0:1.9.3.448-2.pe.el6 set to be updated
+---> Package pe-ruby-augeas.i386 0:0.5.0-3.pe.el6 set to be updated
+---> Package pe-ruby-ldap.i386 0:0.9.12-3.pe.el6 set to be updated
+---> Package pe-ruby-rgen.noarch 0:0.6.2-1.pe.el6 set to be updated
+---> Package pe-ruby-shadow.i386 0:2.2.0-3.pe.el6 set to be updated
+---> Package pe-ruby-stomp.noarch 0:1.2.9-4.pe.el6 set to be updated
+---> Package pe-rubycas-server.noarch 0:1.1.10-1.pe.el6 set to be updated
+---> Package pe-rubygem-builder.noarch 0:3.0.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-deep-merge.noarch 0:1.0.0-3.pe.el6 set to be updated
+---> Package pe-rubygem-excon.noarch 0:0.14.1-2.pe.el6 set to be updated
+---> Package pe-rubygem-fog.noarch 0:1.5.0-3.pe.el6 set to be updated
+---> Package pe-rubygem-formatador.noarch 0:0.2.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-guid.noarch 0:0.1.1-2.pe.el6 set to be updated
+---> Package pe-rubygem-mime-types.noarch 0:1.16-2.pe.el6 set to be updated
+---> Package pe-rubygem-multi-json.noarch 0:1.0.3-2.pe.el6 set to be updated
+---> Package pe-rubygem-net-scp.noarch 0:1.0.4-2.pe.el6 set to be updated
+---> Package pe-rubygem-net-ssh.noarch 0:2.1.4-2.pe.el6 set to be updated
+---> Package pe-rubygem-nokogiri.i386 0:1.5.0-8.pe.el6 set to be updated
+---> Package pe-rubygem-rack.noarch 0:1.4.5-2.pe.el6 set to be updated
+---> Package pe-rubygem-rbvmomi.noarch 0:1.3.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-ruby-hmac.noarch 0:0.4.0-2.pe.el6 set to be updated
+---> Package pe-rubygem-trollop.noarch 0:1.16.2-2.pe.el6 set to be updated
+---> Package pe-tanukiwrapper.i386 0:3.5.9-11.pe.el6 set to be updated
+--> Running transaction check
+---> Package pe-ruby-mysql.i386 0:2.8.2-3.pe.el6 set to be updated
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package               Arch   Version         Repository                   Size
+================================================================================
+Installing:
+ pe-activemq           noarch 5.8.0-5.pe.el6  puppet-enterprise-installer  39 M
+ pe-augeas             i386   1.0.0-4.pe.el6  puppet-enterprise-installer 458 k
+ pe-bundler            noarch 1.3.5-2.pe.el6  puppet-enterprise-installer 158 k
+ pe-certificate-manager
+                       noarch 0.4.6-1.pe.el6  puppet-enterprise-installer  27 k
+ pe-cloud-provisioner  noarch 1.0.10-1.el6    puppet-enterprise-installer  36 k
+ pe-console            noarch 0.3.8-1.pe.el6  puppet-enterprise-installer 473 k
+ pe-console-auth       noarch 1.2.15-1.pe.el6 puppet-enterprise-installer 209 k
+ pe-facter             noarch 1.7.1-2.pe.el6  puppet-enterprise-installer  83 k
+ pe-hiera              noarch 1.2.1-4.pe.el6  puppet-enterprise-installer  15 k
+ pe-httpd              i386   2.2.25-3.pe.el6 puppet-enterprise-installer 2.3 M
+ pe-java               i386   1.7.0.19-3.pe.el6
+                                              puppet-enterprise-installer 184 M
+ pe-libevent           i386   2.0.13-5.el6    puppet-enterprise-installer 153 k
+ pe-libyaml            i386   0.1.4-3.el6     puppet-enterprise-installer 188 k
+ pe-live-management    noarch 1.2.13-1.pe.el6 puppet-enterprise-installer 186 k
+ pe-mcollective        noarch 2.2.4-2.pe.el6  puppet-enterprise-installer  13 k
+ pe-mcollective-client noarch 2.2.4-2.pe.el6  puppet-enterprise-installer  27 k
+ pe-mcollective-common noarch 2.2.4-2.pe.el6  puppet-enterprise-installer 125 k
+ pe-memcached          i386   1.4.7-6.pe.el6  puppet-enterprise-installer  64 k
+ pe-mod_ssl            i386   1:2.2.25-3.pe.el6
+                                              puppet-enterprise-installer 242 k
+ pe-passenger          i386   4.0.10-4.pe.el6 puppet-enterprise-installer 1.3 M
+ pe-postgresql         i386   9.2.4-6.pe.el6  puppet-enterprise-installer  11 M
+ pe-postgresql-server  i386   9.2.4-6.pe.el6  puppet-enterprise-installer 3.8 M
+ pe-puppet             noarch 3.2.4.pe1-1.pe.el6
+                                              puppet-enterprise-installer 998 k
+ pe-puppet-dashboard   i386   2.0.1.pe-1.pe.el6
+                                              puppet-enterprise-installer  13 M
+ pe-puppet-enterprise-release
+                       noarch 3.0.1-1.pe.el6  puppet-enterprise-installer  13 k
+ pe-puppet-server      noarch 3.2.4.pe1-1.pe.el6
+                                              puppet-enterprise-installer  13 k
+ pe-ruby               i386   1.9.3.448-2.pe.el6
+                                              puppet-enterprise-installer 7.5 M
+ pe-ruby-augeas        i386   0.5.0-3.pe.el6  puppet-enterprise-installer  21 k
+ pe-ruby-ldap          i386   0.9.12-3.pe.el6 puppet-enterprise-installer  42 k
+ pe-ruby-rgen          noarch 0.6.2-1.pe.el6  puppet-enterprise-installer  87 k
+ pe-ruby-shadow        i386   2.2.0-3.pe.el6  puppet-enterprise-installer  11 k
+ pe-ruby-stomp         noarch 1.2.9-4.pe.el6  puppet-enterprise-installer  48 k
+ pe-rubycas-server     noarch 1.1.10-1.pe.el6 puppet-enterprise-installer  74 k
+ pe-rubygem-builder    noarch 3.0.0-2.pe.el6  puppet-enterprise-installer 1.0 M
+ pe-rubygem-deep-merge noarch 1.0.0-3.pe.el6  puppet-enterprise-installer  74 k
+ pe-rubygem-excon      noarch 0.14.1-2.pe.el6 puppet-enterprise-installer 285 k
+ pe-rubygem-fog        noarch 1.5.0-3.pe.el6  puppet-enterprise-installer 2.1 M
+ pe-rubygem-formatador noarch 0.2.0-2.pe.el6  puppet-enterprise-installer  17 k
+ pe-rubygem-guid       noarch 0.1.1-2.pe.el6  puppet-enterprise-installer  22 k
+ pe-rubygem-mime-types noarch 1.16-2.pe.el6   puppet-enterprise-installer  82 k
+ pe-rubygem-multi-json noarch 1.0.3-2.pe.el6  puppet-enterprise-installer  25 k
+ pe-rubygem-net-scp    noarch 1.0.4-2.pe.el6  puppet-enterprise-installer  49 k
+ pe-rubygem-net-ssh    noarch 2.1.4-2.pe.el6  puppet-enterprise-installer 227 k
+ pe-rubygem-nokogiri   i386   1.5.0-8.pe.el6  puppet-enterprise-installer 289 k
+ pe-rubygem-rack       noarch 1.4.5-2.pe.el6  puppet-enterprise-installer 405 k
+ pe-rubygem-rbvmomi    noarch 1.3.0-2.pe.el6  puppet-enterprise-installer 243 k
+ pe-rubygem-ruby-hmac  noarch 0.4.0-2.pe.el6  puppet-enterprise-installer  13 k
+ pe-rubygem-trollop    noarch 1.16.2-2.pe.el6 puppet-enterprise-installer  36 k
+ pe-tanukiwrapper      i386   3.5.9-11.pe.el6 puppet-enterprise-installer 259 k
+Installing for dependencies:
+ pe-ruby-mysql         i386   2.8.2-3.pe.el6  puppet-enterprise-installer  48 k
+
+Transaction Summary
+================================================================================
+Install      50 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 271 M
+Installed size: 417 M
+Downloading Packages:
+--------------------------------------------------------------------------------
+Total                                            90 MB/s | 271 MB     00:02     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+Warning: RPMDB altered outside of yum.
+  Installing     : pe-puppet-enterprise-release-3.0.1-1.pe.el6.noarch      1/50 
+  Installing     : pe-httpd-2.2.25-3.pe.el6.i386                           2/50 
+  Installing     : pe-libevent-2.0.13-5.el6.i386                           3/50 
+  Installing     : pe-memcached-1.4.7-6.pe.el6.i386                        4/50 
+  Installing     : pe-augeas-1.0.0-4.pe.el6.i386                           5/50 
+  Installing     : pe-postgresql-9.2.4-6.pe.el6.i386                       6/50 
+  Installing     : pe-java-1.7.0.19-3.pe.el6.i386                          7/50 
+  Installing     : pe-tanukiwrapper-3.5.9-11.pe.el6.i386                   8/50 
+  Installing     : pe-libyaml-0.1.4-3.el6.i386                             9/50 
+  Installing     : pe-ruby-1.9.3.448-2.pe.el6.i386                        10/50 
+  Installing     : pe-ruby-stomp-1.2.9-4.pe.el6.noarch                    11/50 
+  Installing     : pe-mcollective-common-2.2.4-2.pe.el6.noarch            12/50 
+  Installing     : pe-rubygem-rack-1.4.5-2.pe.el6.noarch                  13/50 
+  Installing     : pe-passenger-4.0.10-4.pe.el6.i386                      14/50 
+  Installing     : pe-rubygem-formatador-0.2.0-2.pe.el6.noarch            15/50 
+  Installing     : pe-rubygem-trollop-1.16.2-2.pe.el6.noarch              16/50 
+  Installing     : pe-ruby-mysql-2.8.2-3.pe.el6.i386                      17/50 
+  Installing     : pe-rubygem-ruby-hmac-0.4.0-2.pe.el6.noarch             18/50 
+  Installing     : pe-rubygem-mime-types-1.16-2.pe.el6.noarch             19/50 
+  Installing     : pe-facter-1.7.1-2.pe.el6.noarch                        20/50 
+  Installing     : pe-ruby-rgen-0.6.2-1.pe.el6.noarch                     21/50 
+  Installing     : pe-rubygem-nokogiri-1.5.0-8.pe.el6.i386                22/50 
+  Installing     : pe-rubygem-builder-3.0.0-2.pe.el6.noarch               23/50 
+  Installing     : pe-bundler-1.3.5-2.pe.el6.noarch                       24/50 
+  Installing     : pe-puppet-dashboard-2.0.1.pe-1.pe.el6.i386             25/50 
+  Installing     : pe-console-0.3.8-1.pe.el6.noarch                       26/50 
+  Installing     : pe-console-auth-1.2.15-1.pe.el6.noarch                 27/50 
+  Installing     : pe-rubygem-excon-0.14.1-2.pe.el6.noarch                28/50 
+  Installing     : pe-rubygem-net-ssh-2.1.4-2.pe.el6.noarch               29/50 
+  Installing     : pe-rubygem-net-scp-1.0.4-2.pe.el6.noarch               30/50 
+  Installing     : pe-rubygem-rbvmomi-1.3.0-2.pe.el6.noarch               31/50 
+  Installing     : pe-ruby-shadow-2.2.0-3.pe.el6.i386                     32/50 
+  Installing     : pe-puppet-3.2.4.pe1-1.pe.el6.noarch                    33/50 
+  Installing     : pe-rubygem-deep-merge-1.0.0-3.pe.el6.noarch            34/50 
+  Installing     : pe-rubygem-multi-json-1.0.3-2.pe.el6.noarch            35/50 
+  Installing     : pe-rubygem-fog-1.5.0-3.pe.el6.noarch                   36/50 
+  Installing     : pe-rubygem-guid-0.1.1-2.pe.el6.noarch                  37/50 
+  Installing     : pe-cloud-provisioner-1.0.10-1.el6.noarch               38/50 
+  Installing     : pe-hiera-1.2.1-4.pe.el6.noarch                         39/50 
+  Installing     : pe-puppet-server-3.2.4.pe1-1.pe.el6.noarch             40/50 
+  Installing     : pe-rubycas-server-1.1.10-1.pe.el6.noarch               41/50 
+  Installing     : pe-certificate-manager-0.4.6-1.pe.el6.noarch           42/50 
+  Installing     : pe-live-management-1.2.13-1.pe.el6.noarch              43/50 
+pe-httpd.worker is stopped
+  Installing     : pe-mcollective-2.2.4-2.pe.el6.noarch                   44/50 
+  Installing     : pe-mcollective-client-2.2.4-2.pe.el6.noarch            45/50 
+  Installing     : pe-ruby-augeas-0.5.0-3.pe.el6.i386                     46/50 
+  Installing     : pe-ruby-ldap-0.9.12-3.pe.el6.i386                      47/50 
+  Installing     : pe-activemq-5.8.0-5.pe.el6.noarch                      48/50 
+  Installing     : pe-postgresql-server-9.2.4-6.pe.el6.i386               49/50 
+  Installing     : 1:pe-mod_ssl-2.2.25-3.pe.el6.i386                      50/50 
+
+Installed:
+  pe-activemq.noarch 0:5.8.0-5.pe.el6                                           
+  pe-augeas.i386 0:1.0.0-4.pe.el6                                               
+  pe-bundler.noarch 0:1.3.5-2.pe.el6                                            
+  pe-certificate-manager.noarch 0:0.4.6-1.pe.el6                                
+  pe-cloud-provisioner.noarch 0:1.0.10-1.el6                                    
+  pe-console.noarch 0:0.3.8-1.pe.el6                                            
+  pe-console-auth.noarch 0:1.2.15-1.pe.el6                                      
+  pe-facter.noarch 0:1.7.1-2.pe.el6                                             
+  pe-hiera.noarch 0:1.2.1-4.pe.el6                                              
+  pe-httpd.i386 0:2.2.25-3.pe.el6                                               
+  pe-java.i386 0:1.7.0.19-3.pe.el6                                              
+  pe-libevent.i386 0:2.0.13-5.el6                                               
+  pe-libyaml.i386 0:0.1.4-3.el6                                                 
+  pe-live-management.noarch 0:1.2.13-1.pe.el6                                   
+  pe-mcollective.noarch 0:2.2.4-2.pe.el6                                        
+  pe-mcollective-client.noarch 0:2.2.4-2.pe.el6                                 
+  pe-mcollective-common.noarch 0:2.2.4-2.pe.el6                                 
+  pe-memcached.i386 0:1.4.7-6.pe.el6                                            
+  pe-mod_ssl.i386 1:2.2.25-3.pe.el6                                             
+  pe-passenger.i386 0:4.0.10-4.pe.el6                                           
+  pe-postgresql.i386 0:9.2.4-6.pe.el6                                           
+  pe-postgresql-server.i386 0:9.2.4-6.pe.el6                                    
+  pe-puppet.noarch 0:3.2.4.pe1-1.pe.el6                                         
+  pe-puppet-dashboard.i386 0:2.0.1.pe-1.pe.el6                                  
+  pe-puppet-enterprise-release.noarch 0:3.0.1-1.pe.el6                          
+  pe-puppet-server.noarch 0:3.2.4.pe1-1.pe.el6                                  
+  pe-ruby.i386 0:1.9.3.448-2.pe.el6                                             
+  pe-ruby-augeas.i386 0:0.5.0-3.pe.el6                                          
+  pe-ruby-ldap.i386 0:0.9.12-3.pe.el6                                           
+  pe-ruby-rgen.noarch 0:0.6.2-1.pe.el6                                          
+  pe-ruby-shadow.i386 0:2.2.0-3.pe.el6                                          
+  pe-ruby-stomp.noarch 0:1.2.9-4.pe.el6                                         
+  pe-rubycas-server.noarch 0:1.1.10-1.pe.el6                                    
+  pe-rubygem-builder.noarch 0:3.0.0-2.pe.el6                                    
+  pe-rubygem-deep-merge.noarch 0:1.0.0-3.pe.el6                                 
+  pe-rubygem-excon.noarch 0:0.14.1-2.pe.el6                                     
+  pe-rubygem-fog.noarch 0:1.5.0-3.pe.el6                                        
+  pe-rubygem-formatador.noarch 0:0.2.0-2.pe.el6                                 
+  pe-rubygem-guid.noarch 0:0.1.1-2.pe.el6                                       
+  pe-rubygem-mime-types.noarch 0:1.16-2.pe.el6                                  
+  pe-rubygem-multi-json.noarch 0:1.0.3-2.pe.el6                                 
+  pe-rubygem-net-scp.noarch 0:1.0.4-2.pe.el6                                    
+  pe-rubygem-net-ssh.noarch 0:2.1.4-2.pe.el6                                    
+  pe-rubygem-nokogiri.i386 0:1.5.0-8.pe.el6                                     
+  pe-rubygem-rack.noarch 0:1.4.5-2.pe.el6                                       
+  pe-rubygem-rbvmomi.noarch 0:1.3.0-2.pe.el6                                    
+  pe-rubygem-ruby-hmac.noarch 0:0.4.0-2.pe.el6                                  
+  pe-rubygem-trollop.noarch 0:1.16.2-2.pe.el6                                   
+  pe-tanukiwrapper.i386 0:3.5.9-11.pe.el6                                       
+
+Dependency Installed:
+  pe-ruby-mysql.i386 0:2.8.2-3.pe.el6                                           
+
+Complete!
+# Preserving existing auth.conf
+# Setting up puppet master...
+# Checking the agent certificate name detection...
+# Setting up the database...
+Configuring postgresql server...
+PostgreSQL server configured.
+CREATE TABLESPACE
+CREATE ROLE
+CREATE DATABASE
+CREATE ROLE
+CREATE DATABASE
+CREATE TABLESPACE
+CREATE ROLE
+CREATE DATABASE
+## Setting up the console...
+Performing Puppet dashboard database migration. This may take some time for
+larger databases...
+
+Performing Puppet console authentication database migration. This may take
+some time for larger databases...
+
+## Starting http server for puppet master and console.
+Setting up auth.conf...
+auth.conf updated.
+## Creating symbolic links in "/usr/local/bin"...
+Generating mcollective password...
+Running puppet apply to configure MCollective ...
+MCollective configuration is complete ...
+Configuring puppetdb...
+## Installing packages from repositories...
+Loaded plugins: refresh-packagekit, rhnplugin
+This system is not registered with RHN.
+RHN support will be disabled.
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package pe-puppetdb.noarch 0:1.3.3-1.el6 set to be updated
+---> Package pe-puppetdb-terminus.noarch 0:1.3.3-1.el6 set to be updated
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package               Arch    Version       Repository                    Size
+================================================================================
+Installing:
+ pe-puppetdb           noarch  1.3.3-1.el6   puppet-enterprise-installer   17 M
+ pe-puppetdb-terminus  noarch  1.3.3-1.el6   puppet-enterprise-installer   19 k
+
+Transaction Summary
+================================================================================
+Install       2 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 17 M
+Installed size: 19 M
+Downloading Packages:
+--------------------------------------------------------------------------------
+Total                                            16 MB/s |  17 MB     00:01     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : pe-puppetdb-1.3.3-1.el6.noarch                           1/2 
+Certificate was added to keystore
+Backing up /etc/puppetlabs/puppetdb/conf.d/jetty.ini to /etc/puppetlabs/puppetdb/conf.d/jetty.ini.bak.1381939063 before making changes
+Updated default settings from package installation for ssl-host in /etc/puppetlabs/puppetdb/conf.d/jetty.ini.
+Updated default settings from package installation for ssl-port in /etc/puppetlabs/puppetdb/conf.d/jetty.ini.
+Updated default settings from package installation for key-password in /etc/puppetlabs/puppetdb/conf.d/jetty.ini.
+Updated default settings from package installation for trust-password in /etc/puppetlabs/puppetdb/conf.d/jetty.ini.
+Updated default settings from package installation for keystore in /etc/puppetlabs/puppetdb/conf.d/jetty.ini.
+Updated default settings from package installation for truststore in /etc/puppetlabs/puppetdb/conf.d/jetty.ini.
+  Installing     : pe-puppetdb-terminus-1.3.3-1.el6.noarch                  2/2 
+
+Installed:
+  pe-puppetdb.noarch 0:1.3.3-1.el6   pe-puppetdb-terminus.noarch 0:1.3.3-1.el6  
+
+Complete!
+
+Notice: /Stage[main]//Ini_setting[puppetdb-certificate-whitelist]/ensure: created
+Notice: /Stage[main]/Pe_puppetdb::Database/Ini_setting[kernel.shmmax]/ensure: created
+Notice: /Stage[main]/Pe_puppetdb::Database/Exec[set kernel.shmmax]/returns: executed successfully
+Notice: /Stage[main]//File[/etc/puppetlabs/puppetdb/certificate-whitelist]/ensure: created
+Notice: /Stage[main]//File_line[pe-internal-dashboard]/ensure: created
+Notice: /Stage[main]//File_line[master.rdulinux.com]/ensure: created
+Notice: /Stage[main]/Pe_puppetdb::Database/File[/opt/puppet/var/lib/pgsql/9.2/data/postgresql_puppet_extras.conf]/content: content changed '{md5}d41d8cd98f00b204e9800998ecf8427e' to '{md5}5c914880cf8ed68f2ac1a3e37692606a'
+Notice: /Stage[main]/Postgresql::Server/Service[postgresqld]: Triggered 'refresh' from 1 events
+Notice: /Stage[main]/Puppetdb::Server/Ini_subsetting['-Xmx']/value: value changed '192m' to '256m'
+Notice: /Stage[main]/Puppetdb::Server/Ini_subsetting['-Xms']/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_subprotocol]/value: value changed 'hsqldb' to 'postgresql'
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_report_ttl]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_subname]/value: value changed 'file:/opt/puppet/share/puppetdb/db/db;hsqldb.tx=mvcc;sql.syntax_pgs=true' to '//localhost:5432/pe-puppetdb'
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_pgs]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_gc_interval]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_node_ttl]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_node_purge_ttl]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_psdatabase_username]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_psdatabase_password]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server::Database_ini/Ini_setting[puppetdb_classname]/value: value changed 'org.hsqldb.jdbcDriver' to 'org.postgresql.Driver'
+Notice: /Stage[main]/Puppetdb::Server::Jetty_ini/Ini_setting[puppetdb_host]/ensure: created
+Notice: /Stage[main]/Puppetdb::Server/Service[pe-puppetdb]/ensure: ensure changed 'stopped' to 'running'
+Notice: Finished catalog run in 51.65 seconds
+PuppetDB configured.
+Configuring nodes, classes and groups for mcollective...
+Configuration of nodes, classes and groups for mcollective was enqueued...
+Configuring classes and groups for PuppetDB master node...
+Configuration of classes and groups for PuppetDB master node was enqueued...
+Configuring classes and groups for PuppetDB node...
+Configuration of classes and groups for PuppetDB node was enqueued...
+Applying enqueued configurations...
+All configurations were successfully applied!
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STEP 5: DONE
+
+Thanks for installing Puppet Enterprise!
+Puppet Enterprise has been installed to "/opt/puppet," and its configuration files are located in "/etc/puppetlabs".
+# Answers from this session saved to
+'/root/puppet-enterprise-3.0.1-el-6-i386/answers.lastrun.master'
+## In addition, auto-generated database users and passwords have been saved
+to "/etc/puppetlabs/installer/database_info.install"
+!!! WARNING: Do not discard these files! All auto-generated database users
+and passwords have been saved in them. You
+will need this information to configure the console role during
+installation.
+=============================================================================================================================
+
+The console can be reached at the following URI:
+*  https://master
+
+If you have a firewall running, please ensure the following TCP
+ports are open: 443, 8140, 61613
+WARNING: This system has 1007 MB of memory, which is below the
+minimum requirement of 1 GB for the puppet master role.
+You can attempt to use this system as a puppet master, but
+will probably experience serious problems unless you
+increase its memory.
+NOTICE: This system has 1007 MB of memory, which is
+below the 4 GB we recommend for the PuppetDB role.
+Although this
+node will be a fully functional PuppetDB, you may
+experience poor performance with large numbers of
+nodes. You can
+improve PuppetDB's performance by increasing its
+memory.
+Use this guideline to determine the amount of
+memory required for the number of nodes
+installed.
+
+NODES       | MEMORY
+------------------------------
+1    -  100 | 192 -  512 MB
+100  -  500 | 512 - 1024 MB
+500  - 1000 | 1   -    2 GB
+1000 - 2000 | 2   -    4 GB
+> 2000 | 4 GB or greater
+
+
+=============================================================================================================================
+[root@master puppet-enterprise-3.0.1-el-6-i386]# cat answers.lastrun.master 
+q_all_in_one_install=y
+q_database_host=localhost
+q_database_install=y
+q_database_port=5432
+q_database_root_password=0KlSLyzCOWJG2PqOdtCg
+q_database_root_user=pe-postgres
+q_install=y
+q_pe_database=y
+q_puppet_cloud_install=y
+q_puppet_enterpriseconsole_auth_database_name=console_auth
+q_puppet_enterpriseconsole_auth_database_password=Emlshw89R954EVNEoS3R
+q_puppet_enterpriseconsole_auth_database_user=console_auth
+q_puppet_enterpriseconsole_auth_password=rdulinux
+q_puppet_enterpriseconsole_auth_user_email=admin@rdulinux.com
+q_puppet_enterpriseconsole_database_name=console
+q_puppet_enterpriseconsole_database_password=KWN66MXLaoHA9J3MlAMI
+q_puppet_enterpriseconsole_database_user=console
+q_puppet_enterpriseconsole_httpd_port=443
+q_puppet_enterpriseconsole_install=y
+q_puppet_enterpriseconsole_master_hostname=master.rdulinux.com
+q_puppet_enterpriseconsole_smtp_host=localhost
+q_puppet_enterpriseconsole_smtp_password=
+q_puppet_enterpriseconsole_smtp_port=25
+q_puppet_enterpriseconsole_smtp_use_tls=n
+q_puppet_enterpriseconsole_smtp_user_auth=n
+q_puppet_enterpriseconsole_smtp_username=
+q_puppet_symlinks_install=y
+q_puppetagent_certname=master.rdulinux.com
+q_puppetagent_install=y
+q_puppetagent_server=master.rdulinux.com
+q_puppetdb_database_name=pe-puppetdb
+q_puppetdb_database_password=2Pje1aha3Xpe1hrMlbxU
+q_puppetdb_database_user=pe-puppetdb
+q_puppetdb_hostname=master.rdulinux.com
+q_puppetdb_install=y
+q_puppetdb_port=8081
+q_puppetmaster_certname=master.rdulinux.com
+q_puppetmaster_dnsaltnames=master,master.rdulinux.com,puppet,puppet.rdulinux.com
+q_puppetmaster_enterpriseconsole_hostname=localhost
+q_puppetmaster_enterpriseconsole_port=443
+q_puppetmaster_install=y
+q_run_updtvpkg=n
+q_vendor_packages_install=y
+
+#=========================================== WE ARE DONE WITH INSTALLATION===================================================
+
+After the Installation:
+
+[root@agent1 log]# puppet agent -t
+Exiting; no certificate found and waitforcert is disabled
+
+[root@master puppet-enterprise-3.0.1-el-6-i386]# puppet cert sign --all
+Notice: Signed certificate request for agent1.rdulinux.com
+Notice: Removing file Puppet::SSL::CertificateRequest agent1.rdulinux.com at '/etc/puppetlabs/puppet/ssl/ca/requests/agent1.rdulinux.com.pem'
+Notice: 
+Notice: You have 2 active and no inactive nodes.
+Notice: You are currently licensed for 10 active nodes.
+Notice: 
+Notice: This Puppet Enterprise distribution is licensed to:
+Notice:         N/A
+
+You are using a complimentary ten node license provided free by Puppet Labs.
+Notice: 
+Notice: Your complimentary license does not include Support & Maintenance. If you
+Notice: would like to obtain official Support & Maintenance, please contact us
+Notice: for pricing, and to find out about volume discounts.
+
+[root@agent1 log]# puppet agent --no-daemonize --server master.rdulinux.com --onetime --verbose
+Info: Retrieving plugin
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppetdb_server_status.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/custom_auth_conf.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/postgres_default_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/concat_basedir.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppet_vardir.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/windows.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ip6tables_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/facter_dot_d.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/root_home.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_persistent_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/pe_version.rb
+Info: Caching catalog for agent1.rdulinux.com
+Info: Applying configuration version '1381939834'
+Notice: /Stage[main]/Pe_mcollective::Server/File[/opt/puppet/sbin/refresh-mcollective-metadata]/ensure: defined content as '{md5}b816be63b8fa63a8dc0d8be2f6c90c38'
+Notice: /Stage[main]/Pe_mcollective::Server/Cron[pe-mcollective-metadata]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/data/resource_data.rb]/ensure: defined content as '{md5}41e785704e01cfab6a6c88ebd921bbb9'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/security/sshkey.rb]/ensure: defined content as '{md5}8fa3e9125fd917948445e3d2621d40e5'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/application]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/application/package.rb]/ensure: defined content as '{md5}afcd9a561b087049eccb648a940b592e'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/application/service.rb]/ensure: defined content as '{md5}799681457f0f707a7166da086f97e473'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_tags_validator.ddl]/ensure: defined content as '{md5}7ed95b2e5b210db83d12d5034f1ecb0f'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_server_address_validator.rb]/ensure: defined content as '{md5}9824a78753512eaecb65a95e93cd874b'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_resource_validator.rb]/ensure: defined content as '{md5}567c7dc4d70ed0db7fd2626c77f6df41'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_variable_validator.ddl]/ensure: defined content as '{md5}58c9db4ca4503e4d692a016743e01627'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/service_name.rb]/ensure: defined content as '{md5}3f501a9ed252ce2dfe06a2e1e53845ab'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/service_name.ddl]/ensure: defined content as '{md5}2812afa15108103042f706c2201e286b'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_variable_validator.rb]/ensure: defined content as '{md5}3cbca3af2e5884f2a807ef005a87151b'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_server_address_validator.ddl]/ensure: defined content as '{md5}323e0b9647639fdf32cfbc63a82860f7'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/data/puppet_data.ddl]/ensure: defined content as '{md5}5c9912bf5ae5dbc8762109a40c027c63'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/registration/meta.rb]/ensure: defined content as '{md5}e939958bbbc0817e1779c336037e1849'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_resource_validator.ddl]/ensure: defined content as '{md5}3e45a28e1ba6c8d22ce40934c04b30b4'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/application/puppet.rb]/ensure: defined content as '{md5}3037b1f9a29fba97bd1196186997aba6'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/data/service_data.rb]/ensure: defined content as '{md5}bc651898c7dcd373d609c933fbd6021f'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/puppet.ddl]/ensure: defined content as '{md5}a91fe7c5346acc72cbfbbda1a30a9186'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/package.ddl]/ensure: defined content as '{md5}91071e5a4c437b889be3013663e6400f'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/puppetral.rb]/ensure: defined content as '{md5}5bc9d72845574a3fc08c9062b4b28dd3'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/service.ddl]/ensure: defined content as '{md5}59ab37f55d8e16fda6a2103682545934'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/puppetral.ddl]/ensure: defined content as '{md5}7f06f13953847e60818a681c1f2f168b'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/service.rb]/ensure: defined content as '{md5}cbf84ed615eeda9789650b05ec504566'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/package.rb]/ensure: defined content as '{md5}a069c5ae29e1b2f3a8fe2bb9a10f32ca'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/agent/puppet.rb]/ensure: defined content as '{md5}d720f6de212c1f1b03603aed52d9d656'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/validator/puppet_tags_validator.rb]/ensure: defined content as '{md5}40b29498e867ba2ecf21dc08bc457d4e'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/data/service_data.ddl]/ensure: defined content as '{md5}e7f7e0bc65ede56fc636505a400b1700'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/data/resource_data.ddl]/ensure: defined content as '{md5}c4e3a46fd3c0b5d3990db0b8af1c747f'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/data/puppet_data.rb]/ensure: defined content as '{md5}021d22f47251cd3027ba1777e3503d72'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/package]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr.rb]/ensure: defined content as '{md5}04efaa640da811eb6c85eba52d55a634'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v2]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v2/unix.rb]/ensure: defined content as '{md5}7fb044bc9976103bbbee1190ba5d8f87'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v2/windows.rb]/ensure: defined content as '{md5}3f9d91026b11241a53bd4120d86fc625'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/actionpolicy.rb]/ensure: defined content as '{md5}e4d6a7024ad7b28e019e7b9931eac027'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/package/packagehelpers.rb]/ensure: defined content as '{md5}af83db4ea2647516e50358df4166e571'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v3]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v3/unix.rb]/ensure: defined content as '{md5}ad1047da94aa0cba329f709433e424ef'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v3/manager.rb]/ensure: defined content as '{md5}c59cc70c811ea2d373a9b8cf6ac3234a'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v2/manager.rb]/ensure: defined content as '{md5}4b382b289182cf86161ecfde337b0229'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppetrunner.rb]/ensure: defined content as '{md5}9754554827cb37b768c63beac35da49b'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/v3/windows.rb]/ensure: defined content as '{md5}5ec3972e4c68c0479a7ecb5186677166'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/package/base.rb]/ensure: defined content as '{md5}1bdb7e7a6dcfea6fd2a06c5dc39b7276'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/puppet_agent_mgr/common.rb]/ensure: defined content as '{md5}9812103e96f86be5cbe585bcf0cfc5cf'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/package/puppetpackage.rb]/ensure: defined content as '{md5}161b48fa538e0ddd0118ab09f9405c51'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/aggregate]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/aggregate/boolean_summary.ddl]/ensure: defined content as '{md5}aa581c71a6c7658bffdbaec81590f65d'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/aggregate/boolean_summary.rb]/ensure: defined content as '{md5}0546063313508d8aff603be320af3c44'
+Info: /Stage[main]/Pe_mcollective::Server/File[/etc/puppetlabs/mcollective/server.cfg]: Filebucketed /etc/puppetlabs/mcollective/server.cfg to main with sum a9c7335a83c5ac9f6a19bb195ea0c63e
+Notice: /Stage[main]/Pe_mcollective::Server/File[/etc/puppetlabs/mcollective/server.cfg]/content: content changed '{md5}a9c7335a83c5ac9f6a19bb195ea0c63e' to '{md5}4e636e911b47720826ebd6421e950d46'
+Notice: /Stage[main]/Pe_mcollective::Server/File[/etc/puppetlabs/mcollective/server.cfg]/mode: mode changed '0640' to '0600'
+Info: /Stage[main]/Pe_mcollective::Server/File[/etc/puppetlabs/mcollective/server.cfg]: Scheduling refresh of Service[pe-mcollective]
+Info: /Stage[main]/Pe_mcollective::Server/File[/etc/puppetlabs/mcollective/server.cfg]: Scheduling refresh of Service[pe-mcollective]
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/service]/ensure: created
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/service/base.rb]/ensure: defined content as '{md5}abea7b8fadbf3425a7b68b49b9435ff6'
+Notice: /File[/opt/puppet/libexec/mcollective/mcollective/util/service/puppetservice.rb]/ensure: defined content as '{md5}905db93e1c06ad5a7154fa2f9199f31c'
+Info: /opt/puppet/libexec/mcollective/mcollective: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-private.pem]/ensure: defined content as '{md5}255677c68805cb34f0913ec1eeddc81f'
+Info: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-private.pem]: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-cacert.pem]/ensure: defined content as '{md5}e8a8601195dc51b0302c6116f658ef37'
+Info: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-cacert.pem]: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-public.pem]/ensure: defined content as '{md5}438d5b5e2869319f6ae0fc7d0fe2ce3e'
+Info: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-public.pem]: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-cert.pem]/ensure: defined content as '{md5}41bd75a66e170f57c63f22c1d3e647da'
+Info: /Stage[main]/Pe_mcollective::Shared_key_files/File[mcollective-cert.pem]: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Shared_key_files/File[peadmin-public.pem]/ensure: defined content as '{md5}96dc90cbc4c8a7d02fa8fa317854ecf1'
+Info: /Stage[main]/Pe_mcollective::Shared_key_files/File[peadmin-public.pem]: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Shared_key_files/File[puppet-dashboard-public.pem]/ensure: defined content as '{md5}f5d5bc527114d8662b86ef22ed567150'
+Info: /Stage[main]/Pe_mcollective::Shared_key_files/File[puppet-dashboard-public.pem]: Scheduling refresh of Service[pe-mcollective]
+Notice: /Stage[main]/Pe_mcollective::Server/Service[pe-mcollective]/ensure: ensure changed 'stopped' to 'running'
+Info: /Stage[main]/Pe_mcollective::Server/Service[pe-mcollective]: Unscheduling refresh on Service[pe-mcollective]
+Notice: Finished catalog run in 25.67 seconds
+
+[root@master puppet-enterprise-3.0.1-el-6-i386]# puppet cert --list -all
++ "agent1.rdulinux.com"                           (SHA256) B4:36:31:47:48:C5:5C:E3:7D:10:FF:A8:EF:98:9D:59:B2:99:AC:19:63:E5:60:26:C6:A0:00:1A:54:36:47:B2
++ "master.rdulinux.com"                           (SHA256) 41:62:65:D0:27:D0:2F:3C:AD:A2:92:81:04:46:0F:B1:11:0D:DB:50:EB:2D:A2:5E:37:04:44:EB:67:C0:83:4A (alt names: "DNS:master", "DNS:master.rdulinux.com", "DNS:puppet", "DNS:puppet.rdulinux.com")
++ "pe-internal-broker"                            (SHA256) 1D:63:3C:0E:06:E7:61:35:20:E6:4B:34:09:3F:F5:0F:23:9B:23:48:B1:69:03:57:8B:82:8A:71:E3:E1:03:2D (alt names: "DNS:master.rdulinux.com", "DNS:pe-internal-broker", "DNS:stomp")
++ "pe-internal-dashboard"                         (SHA256) FC:D2:27:C1:4C:E3:DB:BF:CA:A1:13:55:78:5A:A4:43:7F:D4:37:D7:59:7C:27:05:A0:22:45:3E:5F:E6:0F:9A
++ "pe-internal-mcollective-servers"               (SHA256) EC:EB:C9:39:68:EB:20:C7:11:1D:63:B0:A1:FA:E6:C0:32:21:14:C8:91:7B:8D:B7:79:89:EC:D5:26:96:C4:6C
++ "pe-internal-peadmin-mcollective-client"        (SHA256) 27:FA:27:4B:90:CB:8D:E8:1A:B3:27:39:07:C8:94:B1:FA:D5:C4:C2:5B:90:DA:51:7B:0C:A4:C2:A8:99:25:BA
++ "pe-internal-puppet-console-mcollective-client" (SHA256) 1B:3C:42:B3:20:BC:5F:21:7E:59:B9:99:52:BF:E8:68:E8:D0:79:98:40:39:BE:B9:85:9D:4B:60:F6:0B:E4:06
+
+#All signed certificate's you can see it in the below path...
+[root@master signed]# pwd
+/etc/puppetlabs/puppet/ssl/ca/signed
+[root@master signed]# ls -lrth
+total 28K
+-rw-r-----. 1 pe-puppet pe-puppet 2.1K Oct 16 21:11 master.rdulinux.com.pem
+-rw-r-----. 1 pe-puppet pe-puppet 1.5K Oct 16 21:16 pe-internal-dashboard.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2.0K Oct 16 21:24 pe-internal-puppet-console-mcollective-client.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2.0K Oct 16 21:25 pe-internal-peadmin-mcollective-client.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2.0K Oct 16 21:25 pe-internal-broker.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2.0K Oct 16 21:25 pe-internal-mcollective-servers.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2.0K Oct 16 21:37 agent1.rdulinux.com.pem
+
+#Cert related more commands,
+#http://hurricanelabs.com/blog/managing-puppet-certificates/
+
+#To make the puppet configuration syntax highlighting
+download the following zip file from
+https://github.com/puppetlabs/puppet-syntax-vim
+#unzip puppet-syntax-vim-master.zip
+Archive:  puppet-syntax-vim-master.zip
+f36cf6936bf8667d6b86f84e1b81673e80e1f704
+   creating: puppet-syntax-vim-master/
+  inflating: puppet-syntax-vim-master/CONTRIBUTING.md  
+  inflating: puppet-syntax-vim-master/LICENSE  
+  inflating: puppet-syntax-vim-master/README  
+   creating: puppet-syntax-vim-master/ftdetect/
+  inflating: puppet-syntax-vim-master/ftdetect/puppet.vim  
+   creating: puppet-syntax-vim-master/ftplugin/
+  inflating: puppet-syntax-vim-master/ftplugin/puppet.vim  
+   creating: puppet-syntax-vim-master/indent/
+  inflating: puppet-syntax-vim-master/indent/puppet.vim  
+   creating: puppet-syntax-vim-master/syntax/
+  inflating: puppet-syntax-vim-master/syntax/puppet.vim  
+#[root@master ~]# mkdir .vim
+#[root@master ~]# mv puppet-syntax-vim-master/* .vim
+[root@master ~]# cd .vim
+[root@master .vim]# ls
+CONTRIBUTING.md  ftdetect  ftplugin  indent  LICENSE  README  syntax
+
+#[root@master ~]# vim .vimrc 
+[root@master ~]# cat .vimrc 
+syn on
+filetype plugin indent on
+
+
+[root@master ~]# cd /etc/puppetlabs/puppet/manifests/
+[root@master manifests]# ls -l
+total 4
+-rw-r--r--. 1 root root 1659 Oct 16 21:51 site.pp
+
+#Now you should be able to see the syntax highlighting for puppet
+#configuration files
+
+#It's time for us to test puppet agent by writing some file creation
+node agent1{
+
+	file{"/tmp/puppet_3.0":
+		ensure  => present,
+		content => "This is for testing puppet 3.0 deployment by Vellingiri!\n"
+}
+}
+
+[root@agent1 log]# puppet agent --test
+Info: Retrieving plugin
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppetdb_server_status.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/custom_auth_conf.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/postgres_default_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/concat_basedir.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppet_vardir.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/windows.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ip6tables_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/facter_dot_d.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/root_home.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_persistent_version.rb
+Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/pe_version.rb
+Info: Caching catalog for agent1.rdulinux.com
+Info: Applying configuration version '1381941513'
+Notice: /Stage[main]//Node[agent1]/File[/tmp/puppet_3.0]/ensure: created
+Notice: Finished catalog run in 5.05 seconds
+[root@agent1 log]# ls -l /tmp/puppet_3.0 
+-rw-r--r--. 1 root root 57 Oct 16 22:09 /tmp/puppet_3.0
+[root@agent1 log]# cat  /tmp/puppet_3.0 
+This is for testing puppet 3.0 deployment by Vellingiri!
+
+
+#We have tested the agent1 by creating some applying rules on the server..
+#http://www.codelord.net/2010/12/19/using-puppet-to-automatically-configure-new-ec2-instances/
+
+
+#====================================================Puppet New Agent Setup================================================
+
+RHEL5 Agent2
+
+[root@dns-server puppet-enterprise-3.0.1-el-5-i386]# wget http://zid-lux1.uibk.ac.at/pub/dist/centos/5/os/i386/CentOS/virt-what-1.11-2.el5.i386.rpm
+--22:35:53--  http://zid-lux1.uibk.ac.at/pub/dist/centos/5/os/i386/CentOS/virt-what-1.11-2.el5.i386.rpm
+Resolving zid-lux1.uibk.ac.at... 138.232.1.20
+Connecting to zid-lux1.uibk.ac.at|138.232.1.20|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 23970 (23K) [application/x-rpm]
+Saving to: `virt-what-1.11-2.el5.i386.rpm'
+
+100%[====================================================================================>] 23,970      44.7K/s   in 0.5s   
+
+22:35:55 (44.7 KB/s) - `virt-what-1.11-2.el5.i386.rpm' saved [23970/23970]
+
+
+[root@dns-server puppet-enterprise-3.0.1-el-5-i386]# rpm -iUvh virt-what-1.11-2.el5.i386.rpm 
+warning: virt-what-1.11-2.el5.i386.rpm: Header V3 DSA signature: NOKEY, key ID e8562897
+Preparing...                ########################################### [100%]
+   1:virt-what              ########################################### [100%]
+
+[root@dns-server puppet-enterprise-3.0.1-el-5-i386]# wget http://zid-lux1.uibk.ac.at/pub/dist/centos/5/os/i386/CentOS/redhat-logos-4.9.99-11.el5.centos.noarch.rpm
+--22:34:44--  http://zid-lux1.uibk.ac.at/pub/dist/centos/5/os/i386/CentOS/redhat-logos-4.9.99-11.el5.centos.noarch.rpm
+Resolving zid-lux1.uibk.ac.at... 138.232.1.20
+Connecting to zid-lux1.uibk.ac.at|138.232.1.20|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 27485234 (26M) [application/x-rpm]
+Saving to: `redhat-logos-4.9.99-11.el5.centos.noarch.rpm'
+
+100%[====================================================================================>] 27,485,234   183K/s   in 2m 9s  
+
+22:36:54 (207 KB/s) - `redhat-logos-4.9.99-11.el5.centos.noarch.rpm' saved [27485234/27485234]
+
+[root@dns-server puppet-enterprise-3.0.1-el-5-i386]# rpm -iUvh redhat-logos-4.9.99-11.el5.centos.noarch.rpm 
+warning: redhat-logos-4.9.99-11.el5.centos.noarch.rpm: Header V3 DSA signature: NOKEY, key ID e8562897
+Preparing...                ########################################### [100%]
+   1:redhat-logos           ########################################### [100%]
+
+#the answer's file that I'm going to use is
+#
+[root@dns-server puppet-enterprise-3.0.1-el-5-i386]# cat answers.lastrun.dns-server.rdulinux.com 
+q_all_in_one_install=n
+q_database_install=n
+q_fail_on_unsuccessful_master_lookup=y
+q_install=y
+q_pe_database=n
+q_puppet_cloud_install=n
+q_puppet_enterpriseconsole_install=n
+q_puppet_symlinks_install=y
+q_puppetagent_certname=agent2.rdulinux.com
+q_puppetagent_install=y
+q_puppetagent_server=master.rdulinux.com
+q_puppetca_install=n
+q_puppetdb_install=n
+q_puppetmaster_install=n
+q_run_updtvpkg=n
+q_vendor_packages_install=y
+
+[root@dns-server puppet-enterprise-3.0.1-el-5-i386]# ./puppet-enterprise-installer -a answers.lastrun.dns-server.rdulinux.com 
+=============================================================================================================================
+Installed: pe-augeas.i386 0:1.0.0-4.pe.el5 pe-facter.noarch 0:1.7.1-2.pe.el5 pe-hiera.noarch 0:1.2.1-4.pe.el5 pe-libyaml.i386 0:0.1.4-3.el5 pe-mcollective.noarch 0:2.2.4-2.pe.el5 pe-mcollective-common.noarch 0:2.2.4-2.pe.el5 pe-puppet.noarch 0:3.2.4.pe1-1.pe.el5 pe-puppet-enterprise-release.noarch 0:3.0.1-1.pe.el5 pe-ruby.i386 0:1.9.3.448-2.pe.el5 pe-ruby-augeas.i386 0:0.5.0-3.pe.el5 pe-ruby-ldap.i386 0:0.9.12-3.pe.el5 pe-ruby-rgen.noarch 0:0.6.2-1.pe.el5 pe-ruby-shadow.i386 0:2.2.0-3.pe.el5 pe-ruby-stomp.noarch 0:1.2.9-4.pe.el5 pe-rubygem-deep-merge.noarch 0:1.0.0-3.pe.el5 pe-rubygem-net-ssh.noarch 0:2.1.4-2.pe.el5
+Complete!
+## Checking the agent certificate name detection...
+### Setting up puppet agent...
+### Creating symbolic links in "/usr/local/bin"...
+#
+#-----------------------------------------------------------------------------------------------------------------------------
+#
+#STEP 5: DONE
+#
+#Thanks for installing Puppet Enterprise!
+#   Puppet Enterprise has been installed to "/opt/puppet," and its
+#   configuration files are located in "/etc/puppetlabs".
+#   ## Answers from this session saved to
+#   '/root/puppet-enterprise-3.0.1-el-5-i386/answers.lastrun.dns-server.rdulinux.com'
+#
+#   =============================================================================================================================
+#
+#      If you have a firewall running, please ensure outbound connections to
+#      are allowed via the following TCP ports: 8140,
+#         61613
+#
+
+
+just pasted only few outputs for understanding..
+
+signing the certificates now,
+
+[root@master puppet]# puppet cert sign agent2.rdulinux.com
+Notice: Signed certificate request for agent2.rdulinux.com
+Notice: Removing file Puppet::SSL::CertificateRequest agent2.rdulinux.com at '/etc/puppetlabs/puppet/ssl/ca/requests/agent2.rdulinux.com.pem'
+Notice: 
+Notice: You have 3 active and no inactive nodes.
+Notice: You are currently licensed for 10 active nodes.
+Notice: 
+Notice: This Puppet Enterprise distribution is licensed to:
+Notice:         N/A
+
+You are using a complimentary ten node license provided free by Puppet Labs.
+Notice: 
+Notice: Your complimentary license does not include Support & Maintenance. If you
+Notice: would like to obtain official Support & Maintenance, please contact us
+Notice: for pricing, and to find out about volume discounts.
+[root@master puppet]# ls -l ssl/ca/requests/
+total 0
+[root@master puppet]# ls -l ssl/ca/signed/
+total 32
+-rw-r-----. 1 pe-puppet pe-puppet 1960 Oct 16 21:37 agent1.rdulinux.com.pem
+-rw-r-----. 1 pe-puppet pe-puppet 1960 Oct 16 22:57 agent2.rdulinux.com.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2053 Oct 16 21:11 master.rdulinux.com.pem
+-rw-r-----. 1 pe-puppet pe-puppet 2037 Oct 16 21:25 pe-internal-broker.pem
+-rw-r-----. 1 pe-puppet pe-puppet 1436 Oct 16 21:16 pe-internal-dashboard.pem
+-rw-r-----. 1 pe-puppet pe-puppet 1976 Oct 16 21:25 pe-internal-mcollective-servers.pem
+-rw-r-----. 1 pe-puppet pe-puppet 1984 Oct 16 21:25 pe-internal-peadmin-mcollective-client.pem
+-rw-r-----. 1 pe-puppet pe-puppet 1996 Oct 16 21:24 pe-internal-puppet-console-mcollective-client.pem
+
+#Now we have setup one master and two agents with different redhat versions...
+
+http://www.linuxforu.com/2010/12/data-centre-automation-puppet-user-group-management/

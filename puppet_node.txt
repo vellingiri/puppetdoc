@@ -1,0 +1,38 @@
+different ways to configure the nodes
+
+node agent1{
+	include <modulename1>
+}
+
+node agent1, agent2,agent2{
+	include <modulename2>
+}
+
+node 'agent1.rdulinux.com'{
+	include <modulename1>
+	include <modulename2>
+}
+
+node 'agent1.rdulinux.com','agent4.rdulinux.com', 'agent2.rdulinux.com'{
+		include <modulename>, <modulename1>, <modulename2>
+}
+
+node /^agent\d+$/{
+	include modulename1
+	include modulename2
+	include module3,module4,module5
+}
+
+node /^(agent|master)\.rdulinux\.com$/{
+	include module1, module2
+}
+
+node base{
+	include baseclass
+}
+
+node agent1 inherits base{
+	include module8
+	include module9
+}
+

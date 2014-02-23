@@ -1,0 +1,29 @@
+#rpm -ivh /var/ftp/pub/RHEL6/Packages/vsftpd-2.2.2-6.el6.x86_64.rpm
+
+
+#rpm -ivh /var/ftp/pub/RHEL6/Packages/createrepo-0.9.8-4.el6.noarch.rpm
+	dependency packages are,
+#rpm -ivh /var/ftp/pub/RHEL6/Packages/deltarpm-3.5-0.5.20090913git.el6.x86_64.rpm
+
+#rpm -ivh /var/ftp/pub/RHEL6/Packages/python-deltarpm-3.5-0.5.20090913git.el6.x86_64.rpm
+
+#service vsftpd status
+
+#service vsftpd start
+
+#service vsftpd status
+
+#chkconfig vsftpd on
+
+#mkdir /var/ftp/pub/rhel6
+
+#cp -rvf /media/* /var/ftp/pub/rhel6/
+
+#createrepo -v /var/ftp/pub/rhel6/
+
+#vi /etc/yum.repos.d/server.repo
+[Packages]
+name=Redhat Enterprise Linux 6
+baseurl=ftp://172.24.0.254/pub/rhel6
+gpgcheck=0
+enabled=1

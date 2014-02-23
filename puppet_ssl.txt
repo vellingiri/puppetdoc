@@ -1,0 +1,10 @@
+on master side:
+signing single agent/node certification
+#puppet cert sign <agent1/node1>
+
+signing more than one agent's certificate
+#puppet cert sign <agent1> <agent2> <agent3>
+
+signing all waiting certificate's at once
+#puppet cert sign -all
+
