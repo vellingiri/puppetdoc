@@ -1093,3 +1093,5 @@ total 32
 #Now we have setup one master and two agents with different redhat versions...
 
 http://www.linuxforu.com/2010/12/data-centre-automation-puppet-user-group-management/
+
+
